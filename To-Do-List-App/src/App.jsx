@@ -24,16 +24,9 @@ let copyTask =[...mainTask]
 copyTask.splice(i,1)
 setmainTask(copyTask)
   }
-  const completeHandler = (i) => {
-    let copyTask = [...mainTask];
-    copyTask[i].completed = !copyTask[i].completed;
-    setmainTask(copyTask);
-  };
-
   
 
-
-    let reanderTask = <h2>No Task Available</h2>
+let reanderTask = <h2>No Task Available</h2>
 
     if (mainTask.length > 0) {
 
@@ -52,11 +45,7 @@ setmainTask(copyTask)
               deleteHandler(i)
             }}
             className="bg-red-400 text-white px-4 py-2 rounded font-bold">Delete</button>
-            <button
-            onClick={()=>{
-              completeHandler(i)
-            }}
-            className="bg-green-400 text-white px-4 py-2 rounded font-bold">Completed</button>
+          
             </div>
           </li>
         )
