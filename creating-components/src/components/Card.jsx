@@ -17,7 +17,7 @@ function Card({data}) {
                 </div>
                 {
                     data.tag?.isOpen ? (
-                        <div className={`tag  text-white w-full py-4 bg-${data.tag.tagcolor}-600 text-center `}>
+                        <div className="tag  text-white w-full py-4 bg-green-600 text-center ">
                             <h3 className='text-sm font-semibold '>{data.tag.tagTitle}</h3>
                         </div>
                     ) : null
