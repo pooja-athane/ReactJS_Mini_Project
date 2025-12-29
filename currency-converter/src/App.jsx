@@ -2,30 +2,30 @@ import React, { useState } from "react";
 import InputBox from "./component/InputBox";
 import useCurrencyInfo from "./hooks/useCurrencyInfo";
 
-function App(){
+function App() {
 
-  const [amount, setAmount]=useState(0)
-  const [from, setFrom] = useState("usd")
-  const [to, setTo] =useState("inr")
-  const [convertedAmount, setConvertedAmount]=useState(0)
+    const [amount, setAmount] = useState(0)
+    const [from, setFrom] = useState("usd")
+    const [to, setTo] = useState("inr")
+    const [convertedAmount, setConvertedAmount] = useState(0)
 
-  //our created custom hooks
+    //our created custom hooks
 
-  const currencyInfo=useCurrencyInfo(from)
-  const options = Object.keys(currencyInfo)
-  const swap = ()=>{
-    setFrom(to)
-    setTo(from)
-    setConvertedAmount(amount)
-    setAmount(convertedAmount)
-  }
+    const currencyInfo = useCurrencyInfo(from)
+    const options = Object.keys(currencyInfo)
+    const swap = () => {
+        setFrom(to)
+        setTo(from)
+        setConvertedAmount(amount)
+        setAmount(convertedAmount)
+    }
 
-  const convert = ()=>{
-    setConvertedAmount(amount * currencyInfo[to])
-  }
+    const convert = () => {
+        setConvertedAmount(amount * currencyInfo[to])
+    }
 
 
-  return (
+    return (
         <div
             className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
             style={{
@@ -77,7 +77,7 @@ function App(){
             </div>
         </div>
     )
- 
+
 
 }
- export default App
+export default App
