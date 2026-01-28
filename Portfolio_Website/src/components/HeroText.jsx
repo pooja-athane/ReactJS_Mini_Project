@@ -40,7 +40,7 @@ const HeroText = () => {
                         variants={Variants}
                         initial="hidden"
                         animate="visible"
-                        transition={{ delay: 1.2 }}
+                        transition={{ delay: 1.1 }}
                     >
                         Adevloper<br /> Dedicated to Crafting
                     </motion.p>
@@ -51,7 +51,7 @@ const HeroText = () => {
                         variants={Variants}
                         initial="hidden"
                         animate="visible"
-                        transition={{ delay: 1.5 }}
+                        transition={{ delay: 1.2 }}
                     >
                         <FlipWords
                             words={words}
@@ -66,7 +66,7 @@ const HeroText = () => {
                         variants={Variants}
                         initial="hidden"
                         animate="visible"
-                        transition={{ delay: .8 }}
+                        transition={{ delay: 1.3 }}
                     >
                         Web Solutions
                     </motion.p>
