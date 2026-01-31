@@ -17,7 +17,26 @@ export function Astronaut(props) {
     "/models/tenhun_falling_spaceman_fanart.glb"
   );
   const { actions } = useAnimations(animations, group);
- 
+
+  // we create props for animation at center position
+  useEffect(() => {
+    if (animations.length > 0) {
+      actions[animations[0].name]?.play()
+    }
+  }, [actions, animations])
+
+  // according to y axis animation will be run
+  const yPosition = useMotionValue(5)
+  const ySpring = useSpring(yPosition, { damping: 30 })
+  useEffect(() => {
+    // initial animation whr start the animation
+    ySpring.set(-1)
+  }, [ySpring])
+
+  useFrame(()=>{
+    group.current.position.y= ySpring.get()
+  })
+
   return (
     <group
       ref={group}
@@ -101,5 +120,20 @@ export function Astronaut(props) {
               <group name="Cube003" />
               <group name="Cube" />
               <group
-                name=
-awy-qqek-xzf
+                name="Cube009"
+                rotation={[-2.708, 0.013, -1.447]}
+                scale={1.307}
+              />
+              <group name="Cube011" />
+            </group>
+          </group>
+        </group>
+      </group>
+    </group>
+  );
+}
+
+useGLTF.preload("/models/tenhun_falling_spaceman_fanart.glb");
+
+
+
