@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import HeroText from '../components/HeroText'
 import ParallexBackground from '../components/ParallexBackground'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { Astronaut } from '../components/Astronaut'
 import { useMediaQuery } from 'react-responsive'
+import { Float } from '@react-three/drei'
+import Loader from '../components/Loader'
+// import easing from 'math'
 
 
 const Hero = () => {
@@ -22,7 +25,14 @@ const Hero = () => {
                 }}
             >
 
-                <Canvas>
+                <Canvas
+                    camera={{
+                        position: [0, 1, 3]
+                    }}
+                >
+                    <Suspense fallback={<Loader />}>
+                        <Float></Float>
+                    </Suspense>
                     <Astronaut
                         scale={isMobile && 0.23}
                         position={isMobile && [0, -1.5, 0]}
@@ -40,6 +50,21 @@ const Hero = () => {
 }
 
 
-
+//for orbit animation
+function Rig() {
+    return useFrame((state, delta) => {
+        easing.damp3(
+            // /inital position
+            state.camera.position,
+            // mouse movement
+            [state.mouse.x / 10,
+            1 + state.mouse.y / 10,
+                1
+            ],
+            0.5,
+            delta
+        )
+    })
+}
 
 export default Hero
