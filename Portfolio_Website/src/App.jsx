@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import Navbar from './section/Navbar'
 import Hero from './section/Hero'
 import About from './section/About'
+import Projects from './section/Projects'
+import Experience from './section/Experience'
+import Testimonial from './section/Testimonial'
+import Footer from './section/Footer'
+import Contact from './section/Contact'
 
 
 
@@ -13,6 +18,11 @@ function App() {
           <Navbar/>
           <Hero />
           <About/>
+          <Projects/>
+          <Experience/>
+          <Testimonial/>
+          <Contact/>
+          <Footer/>
          
           
         {/* <section className='h-screen w-full'></section>

@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import React from "react";
 
-export  default function OrbitingCircles({
+export function OrbitingCircles({
   className,
   children,
   reverse,
