@@ -42,7 +42,7 @@ const HeroText = () => {
                         animate="visible"
                         transition={{ delay: 1.1 }}
                     >
-                        Adevloper<br /> Dedicated to Crafting
+                        A developer<br /> Dedicated to Crafting
                     </motion.p>
 
                     {/* Animated words */}
