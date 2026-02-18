@@ -1,6 +1,6 @@
 function EmailRow({ sender, subject, message, time }) {
   return (
-    <div className="flex items-center p-2 text-sm font-medium border-b hover:shadow-sm cursor-pointer">
+    <div className="flex items-center p-2 text-sm font-medium border-b hover:shadow-md cursor-pointer">
 
       <input type="checkbox"
        onClick={(e) => e.stopPropagation()} />

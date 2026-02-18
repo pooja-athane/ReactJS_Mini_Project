@@ -1,7 +1,7 @@
 import React from 'react'
 import EmailRow from './EmailRow';
 
-function EmailList() {
+function EmailList({activeSection, selectedEmail, setSelectedEmail}) {
     const emails = [
     {
       id: 1,
@@ -109,26 +109,78 @@ function EmailList() {
       time: "Yesterday"
     },
   ];
-  return (
-    <div className="flex-1 bg-white ">
-      <div className="flex justify-between  border-b">
-        <p className="p-3 hover:bg-gray-100 cursor-pointer">Primary</p>
-        <p className="p-3 hover:bg-gray-100 cursor-pointer">Social</p>
-        <p className="p-3 hover:bg-gray-100 cursor-pointer">Promotions</p>
-        <p className="p-3 hover:bg-gray-100 cursor-pointer">Updates</p>
+
+if(selectedEmail) {
+  return(
+    <div className="flex-1 h-screen bg-gray-100 flex justify-center items-center">
+      <div className="w-[700px] h-[400px] bg-white rounded-lg shadow-lg p-6 relative">
+        <button 
+        onClick={()=>setSelectedEmail(null)}
+        className='absolute top-4 left-4 bg-gray-200 px-3 py-1 rounded hover:bg-gray-300'
+        >Back </button>
+        <h2 
+        className='text-2xl font-bold mt-10' >
+          {selectedEmail.subject}
+        </h2>
+
+      <p 
+      className='text-blue-500 mt-2'>
+        From: {selectedEmail.sender}
+      </p>
+
+      <p 
+      className="mt-6 text-gray-700">
+            {selectedEmail.message}
+          </p>
       </div>
 
+    </div>
+  )
+}
+  return (
+    // <div className="flex-1 bg-white ">
+    //   <div className="flex justify-between  border-b">
+    //     <p className="p-3 hover:bg-gray-100 cursor-pointer">Primary</p>
+    //     <p className="p-3 hover:bg-gray-100 cursor-pointer">Social</p>
+    //     <p className="p-3 hover:bg-gray-100 cursor-pointer">Promotions</p>
+    //     <p className="p-3 hover:bg-gray-100 cursor-pointer">Updates</p>
+    //   </div>
+
+    //   {emails.map((email)=>(
+    //     <EmailRow
+    //       key={email.id}
+    //       sender={email.sender}
+    //       subject={email.subject}
+    //       message={email.message}
+    //       time={email.time}
+    //     />
+    //   ))}
+    // </div>
+
+    <div className="flex-1 h-screen bg-white overflow-y-auto">
+      <h2 
+      className="p-3 font-semibold border-b">
+        {activeSection}
+      </h2>
+
       {emails.map((email)=>(
-        <EmailRow
-          key={email.id}
-          sender={email.sender}
-          subject={email.subject}
-          message={email.message}
-          time={email.time}
-        />
+        <div 
+        key={email.id}
+        className="cursor-pointer"
+        onClick={()=>{setSelectedEmail(email)}}
+        >
+          <EmailRow
+            key={email.id}
+            sender={email.sender}
+            subject={email.subject}
+            message={email.message}
+            time={email.time}
+          />
+        </div>
       ))}
     </div>
   )
+  
 }
 
 export default EmailList

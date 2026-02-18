@@ -26,7 +26,12 @@ const Sidebar = (props) => {
     if (props.isOpen) {
         width = "w-[270px]"
     } else {
-        width = "w-[70px]"
+        width = "w-[90px]"
+    }
+
+    function handleClick(name) {
+        props.setactiveSection(name)
+        props.setSelectedEmail(null)
     }
 
     return (
@@ -53,7 +58,14 @@ const Sidebar = (props) => {
                     {items.map((item) => (
                         <div
                             key={item.name}
-                            className="flex items-center  py-1 px-4  rounded-r- cursor-pointer gap-2 hover:bg-gray-100"
+                            onClick={() => handleClick(item.name)}
+                            className={"flex items-center  py-1 px-4  rounded-r- cursor-pointer gap-2 hover:bg-gray-100"
+                                +
+                                (props.activeSection === item.name
+                                    ? "bg-blue-100 font-medium"
+                                    : "hover:bg-gray-100"
+                                )
+                            }
                         >
                             <img
                                 src={item.icon}
@@ -69,7 +81,7 @@ const Sidebar = (props) => {
 
             </div>
 
-            {/* BOTTOM UPGRADE BUTTON */}
+            {/* Bottom Upgrade Button */}
             <button className="flex items-center gap-2 p-2 hover:bg-gray-100">
 
                 <div className="h-5 w-5 border-2 border-black rounded-full flex items-center justify-center text-xs">

@@ -9,6 +9,10 @@ function App() {
 
   const [isOpen, setIsOpen] = useState(true)
 
+  const [activeSection, setactiveSection] = useState("Inbox")
+
+  const [selectedEmail, setSelectedEmail] = useState(null)
+
   
 
   function toggleSidebar() {
@@ -20,13 +24,21 @@ function App() {
     <>
       <div className="app  h-screen flex flex-col">
         <Header toggleSidebar={toggleSidebar} />
-        <div className="flex flex-1">
+        <div className="flex flex-1 overflow-hidden">
           
-            <Sidebar isOpen={isOpen} />
+            <Sidebar isOpen={isOpen} 
+            activeSection={activeSection}
+            setactiveSection={setactiveSection}
+            setSelectedEmail={setSelectedEmail}
+         />
           
 
-          <div className="flex-1 bg-gray-50">
-            <EmailList />
+          <div className="flex-1 bg-gray-50 overflow-y-auto">
+            <EmailList 
+            activeSection={activeSection}
+            selectedEmail={selectedEmail}
+            setSelectedEmail={setSelectedEmail}
+            />
           </div>
         </div>
 
