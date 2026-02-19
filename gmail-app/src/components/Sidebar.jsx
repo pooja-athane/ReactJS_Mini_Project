@@ -42,7 +42,9 @@ const Sidebar = (props) => {
 
                 {/* Compose Button */}
                 <button
-                    className="flex items-center gap-3 bg-[#C2E7FF] h-12 px-5 rounded-md shadow-sm hov mb-4">
+                    className="flex items-center gap-3 bg-[#C2E7FF] h-12 px-5 rounded-md shadow-sm hov mb-4"
+                    onClick={()=>props.setShowCompose(true)}
+                    >
                     <img
                         src="src/assets/edit.png"
                         alt="compose"

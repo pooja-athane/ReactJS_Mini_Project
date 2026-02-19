@@ -3,6 +3,7 @@ import './App.css'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import EmailList from './components/EmailList'
+import Compose from './components/Compose'
 
 
 function App() {
@@ -13,7 +14,9 @@ function App() {
 
   const [selectedEmail, setSelectedEmail] = useState(null)
 
-  
+  const [showCompose, setShowCompose] = useState(false)
+
+
 
   function toggleSidebar() {
     setIsOpen(!isOpen)
@@ -25,21 +28,28 @@ function App() {
       <div className="app  h-screen flex flex-col">
         <Header toggleSidebar={toggleSidebar} />
         <div className="flex flex-1 overflow-hidden">
-          
-            <Sidebar isOpen={isOpen} 
+
+          <Sidebar isOpen={isOpen}
             activeSection={activeSection}
             setactiveSection={setactiveSection}
             setSelectedEmail={setSelectedEmail}
-         />
+            setShowCompose={setShowCompose}
+          />
+
           
 
+
           <div className="flex-1 bg-gray-50 overflow-y-auto">
-            <EmailList 
-            activeSection={activeSection}
-            selectedEmail={selectedEmail}
-            setSelectedEmail={setSelectedEmail}
+            <EmailList
+              activeSection={activeSection}
+              selectedEmail={selectedEmail}
+              setSelectedEmail={setSelectedEmail}
             />
           </div>
+
+          {showCompose && (
+            <Compose setShowCompose={setShowCompose} />
+          )}
         </div>
 
       </div>
