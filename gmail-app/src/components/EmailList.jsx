@@ -1,8 +1,15 @@
 import React from 'react'
 import EmailRow from './EmailRow';
 
-function EmailList({activeSection, selectedEmail, setSelectedEmail}) {
-    const emails = [
+function EmailList(
+  {
+    activeSection,
+    selectedEmail,
+    setSelectedEmail,
+    sentEmails
+  }
+) {
+  const emails = [
     {
       id: 1,
       sender: "Amazon",
@@ -108,35 +115,59 @@ function EmailList({activeSection, selectedEmail, setSelectedEmail}) {
       message: "Your order has been delivered.",
       time: "Yesterday"
     },
+    {
+      id: 16,
+      sender: "Amazon",
+      subject: "Your order has been shipped",
+      message: "Your package will arrive tomorrow.",
+      time: "10:30 AM"
+    },
+    {
+      id: 17,
+      sender: "Flipkart",
+      subject: "Big Sale is Live",
+      message: "Don't miss amazing offers today.",
+      time: "9:15 AM"
+    },
+    {
+      id: 18,
+      sender: "Instagram",
+      subject: "New Follower",
+      message: "Someone started following you.",
+      time: "Yesterday"
+    },
   ];
 
-if(selectedEmail) {
-  return(
-    <div className="flex-1 h-screen bg-gray-100 flex justify-center items-center">
-      <div className="w-[700px] h-[400px] bg-white rounded-lg shadow-lg p-6 relative">
-        <button 
-        onClick={()=>setSelectedEmail(null)}
-        className='absolute top-4 left-4 bg-gray-200 px-3 py-1 rounded hover:bg-gray-300'
-        >Back </button>
-        <h2 
-        className='text-2xl font-bold mt-10' >
-          {selectedEmail.subject}
-        </h2>
+  const displayEmailornot = activeSection === "Sent" ? sentEmails : emails;
 
-      <p 
-      className='text-blue-500 mt-2'>
-        From: {selectedEmail.sender}
-      </p>
+  if (selectedEmail) {
+    return (
+      <div className="flex-1 h-screen bg-gray-100 flex justify-center items-center">
+        <div className="w-[700px] h-[400px] bg-white rounded-lg shadow-lg p-6 relative">
 
-      <p 
-      className="mt-6 text-gray-700">
+          <button
+            onClick={() => setSelectedEmail(null)}
+            className='absolute top-4 left-4 bg-gray-200 px-3 py-1 rounded hover:bg-gray-300'
+          >Back </button>
+          <h2
+            className='text-2xl font-bold mt-10' >
+            {selectedEmail.subject}
+          </h2>
+
+          <p
+            className='text-blue-500 mt-2'>
+            From: {selectedEmail.to || selectedEmail.sender}
+          </p>
+
+          <p
+            className="mt-6 text-gray-700">
             {selectedEmail.message}
           </p>
-      </div>
+        </div>
 
-    </div>
-  )
-}
+      </div>
+    )
+  }
   return (
     // <div className="flex-1 bg-white ">
     //   <div className="flex justify-between  border-b">
@@ -158,29 +189,33 @@ if(selectedEmail) {
     // </div>
 
     <div className="flex-1 h-screen bg-white overflow-y-auto">
-      <h2 
-      className="p-3 font-semibold border-b">
+      <h2
+        className="p-3 font-semibold border-b">
         {activeSection}
       </h2>
 
-      {emails.map((email)=>(
-        <div 
-        key={email.id}
-        className="cursor-pointer"
-        onClick={()=>{setSelectedEmail(email)}}
-        >
-          <EmailRow
-            key={email.id}
-            sender={email.sender}
-            subject={email.subject}
-            message={email.message}
-            time={email.time}
-          />
-        </div>
-      ))}
+
+      {displayEmailornot.length === 0 ? (
+        <p className="p-4 text-gray-500">No Emails</p>
+      ) : (
+        displayEmailornot.map((email, index) => (
+          <div
+            key={index}
+            className="cursor-pointer"
+            onClick={() => setSelectedEmail(email)}
+          >
+            <EmailRow
+              sender={email.to || email.sender}
+              subject={email.subject}
+              message={email.message}
+              time={email.time}
+            />
+          </div>
+        ))
+      )}
+
     </div>
   )
-  
 }
 
 export default EmailList

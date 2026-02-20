@@ -16,6 +16,8 @@ function App() {
 
   const [showCompose, setShowCompose] = useState(false)
 
+  const [sentEmails, setSentEmails] = useState([])
+
 
 
   function toggleSidebar() {
@@ -34,9 +36,10 @@ function App() {
             setactiveSection={setactiveSection}
             setSelectedEmail={setSelectedEmail}
             setShowCompose={setShowCompose}
+
           />
 
-          
+
 
 
           <div className="flex-1 bg-gray-50 overflow-y-auto">
@@ -44,11 +47,14 @@ function App() {
               activeSection={activeSection}
               selectedEmail={selectedEmail}
               setSelectedEmail={setSelectedEmail}
+              sentEmails={sentEmails}
             />
           </div>
 
           {showCompose && (
-            <Compose setShowCompose={setShowCompose} />
+            <Compose setShowCompose={setShowCompose}
+              setSentEmails={setSentEmails}
+            />
           )}
         </div>
 
