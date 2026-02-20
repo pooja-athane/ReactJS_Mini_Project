@@ -10,8 +10,22 @@ function Compose(
   const [to, setTo] = useState("")
   const [subject, setSubject] = useState("")
   const [message, setMessage] = useState("")
+  const [error, setError] = useState("")
 
   const send = () => {
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(to.trim()===""){
+      setError("Email is Required")
+        return;
+    }
+
+    if(!emailRegex.test(to)){
+      setError("Please enter a valid email address")
+        return;
+    }
+
     const newEmail = {
       to: to,
       subject: subject,
@@ -45,7 +59,11 @@ function Compose(
           value={to}
           className="w-full border-b outline-none py-2"
           onChange={(e) => setTo(e.target.value)}
+          setError={setError}
         />
+        {error && (
+          <p className="text-red-500 text-sm">{error}</p>
+        )}
 
         <input
           type="text"
@@ -54,6 +72,8 @@ function Compose(
           className="w-full border-b outline-none py-2"
           onChange={(e) => setSubject(e.target.value)}
         />
+
+        
 
         <textarea
           placeholder="Message..."
