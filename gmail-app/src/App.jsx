@@ -9,14 +9,11 @@ import Compose from './components/Compose'
 function App() {
 
   const [isOpen, setIsOpen] = useState(true)
-
   const [activeSection, setactiveSection] = useState("Inbox")
-
   const [selectedEmail, setSelectedEmail] = useState(null)
-
   const [showCompose, setShowCompose] = useState(false)
-
   const [sentEmails, setSentEmails] = useState([])
+  const [draftEmails, setDraftEmails] = useState([])
 
 
 
@@ -28,10 +25,14 @@ function App() {
   return (
     <>
       <div className="app  h-screen flex flex-col">
-        <Header toggleSidebar={toggleSidebar} />
-        <div className="flex flex-1 overflow-hidden">
+        <Header toggleSidebar={toggleSidebar}
+          setSelectedEmail={setSelectedEmail} />
 
-          <Sidebar isOpen={isOpen}
+        <div className="flex flex-1 overflow-hidden ">
+
+          <Sidebar
+            isOpen={isOpen}
+            toggleSidebar={toggleSidebar}
             activeSection={activeSection}
             setactiveSection={setactiveSection}
             setSelectedEmail={setSelectedEmail}
@@ -40,20 +41,23 @@ function App() {
           />
 
 
-
-
-          <div className="flex-1 bg-gray-50 overflow-y-auto">
+          <div
+            className={`flex-1 w-full bg-gray-50 overflow-y-auto transition-all duration-300 md:px-4"
+              }`}
+          >
             <EmailList
               activeSection={activeSection}
               selectedEmail={selectedEmail}
               setSelectedEmail={setSelectedEmail}
               sentEmails={sentEmails}
+              draftEmails={draftEmails}
             />
           </div>
 
           {showCompose && (
             <Compose setShowCompose={setShowCompose}
               setSentEmails={setSentEmails}
+              setDraftEmails={setDraftEmails}
             />
           )}
         </div>

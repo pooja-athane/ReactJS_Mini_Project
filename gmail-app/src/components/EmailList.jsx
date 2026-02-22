@@ -7,17 +7,29 @@ function EmailList(
     activeSection,
     selectedEmail,
     setSelectedEmail,
-    sentEmails
+    sentEmails,
+    draftEmails
   }
 ) {
-  
-  const displayEmailornot = activeSection === "Sent" ? sentEmails : emails;
+
+  // const displayEmailornot = activeSection === "Sent" ? sentEmails : emails;
+
+  let displayEmailornot;
+
+  if (activeSection === "Sent") {
+    displayEmailornot = sentEmails;
+  }
+  else if (activeSection === "Drafts") {
+    displayEmailornot = draftEmails;
+  }
+  else {
+    displayEmailornot = emails;
+  }
 
   if (selectedEmail) {
     return (
-      <div className="flex-1 h-screen bg-gray-100 flex justify-center items-center">
-        <div className="w-[700px] h-[400px] bg-white rounded-lg shadow-lg p-6 relative">
-
+      <div className="flex-1 h-screen bg-gray-100 flex justify-center items-center px-2 md:px-4">
+        <div className="w-full max-w-[700px] h-auto md:h-[400px] bg-white rounded-lg shadow-lg p-6 relative overflow-y-auto mx-auto">
           <button
             onClick={() => setSelectedEmail(null)}
             className='absolute top-4 left-4 bg-gray-200 px-3 py-1 rounded hover:bg-gray-300'
@@ -61,7 +73,7 @@ function EmailList(
     //   ))}
     // </div>
 
-    <div className="flex-1 h-screen bg-white overflow-y-auto">
+    <div className="flex-1 w-full h-screen bg-white overflow-y-auto px-2 md:px-4">
       <h2
         className="p-3 font-semibold border-b">
         {activeSection}
